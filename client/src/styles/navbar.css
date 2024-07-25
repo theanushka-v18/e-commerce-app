@@ -1,0 +1,103 @@
+/* ----------- global styles --------------- */
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ------------- navbar notification styles starts ------------- */
+
+.navbar-notification {
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Zain', sans-serif;
+    font-weight: 200;
+}
+
+.navbar-notification div {
+    width:80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.navbar-notification a {
+    color: white;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.navbar-notification .close {
+    font-size: 28px;
+    cursor: pointer;
+    margin-top: 4px;
+}
+
+/* ------------- navbar notification styles ends ------------- */
+
+/* ------------- navbar container styles starts ------------- */
+.navbar-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-top: 24px;
+}
+
+.navbar-container h2 {
+    font-family: "Kanit";
+    font-weight: 800;
+    font-size: 32px;
+}
+
+.menu-links ul {
+    display: flex;
+    gap: 24px;
+}
+
+.menu-links a {
+    font-family: 'Zain', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: black;
+}
+
+.navbar-input {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    color: #00000050;
+    /* border: 1px solid red; */
+}
+
+.navbar-input input {
+    background-color: #f0f0f0;
+    outline: none;
+    border: none;
+    padding-block: 12px;
+    padding-left: 40px;
+    padding-right: 16px;
+    border-radius: 24px;
+    width: 100%;
+    position: relative;
+    right: 30px;
+    z-index: -1;
+}
+
+.navbar-input input::placeholder {
+    color: #00000050;
+}
+
+.navbar-container .navbar-icons {
+    display: flex;
+    gap: 24px;
+    cursor: pointer;
+}
+/* ------------- navbar container styles ends ------------- */

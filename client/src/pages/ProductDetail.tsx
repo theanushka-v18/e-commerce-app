@@ -1,8 +1,9 @@
-import React from 'react'
+import Navbar from '../components/Navbar'
 
 const ProductDetail = () => {
   return (
     <div>
+      <Navbar />
       Product Detail
     </div>
   )
