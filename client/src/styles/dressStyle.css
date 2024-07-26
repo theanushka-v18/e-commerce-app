@@ -1,0 +1,27 @@
+.dress-style-section {
+    padding: 64px;
+}
+.dress-style-section div {
+    background-color: #f0f0f0;
+    border-radius: 40px;
+    padding: 48px;
+}
+
+.dress-style-section h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+}
+
+.img-section1 {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding-block: 0!important;
+    padding-bottom: 16px!important;
+}
+
+.img-section1 img {
+    cursor: pointer;
+}

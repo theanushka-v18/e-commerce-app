@@ -27,7 +27,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className='navbar-input'>
-          <SearchOutlinedIcon id='search-icon' />
+          <span className='search-icon'><SearchOutlinedIcon /></span>
           <input type='text' placeholder='Search for products...' />
         </div>
         <div className='navbar-icons'>

@@ -1,0 +1,99 @@
+.hero-section-container {
+    background-color: #f2f0f1;
+    margin-top: 24px;
+    height: 78vh;
+}
+
+.top-section {
+    display: flex;
+    gap: 16px;
+    font-family: 'Kanit', sans-serif;
+    padding-inline: 64px;
+}
+
+.text-section a {
+   border: none;
+   background-color: black;
+   color: white;
+   padding: 16px 64px;
+   border-radius: 48px;
+   /* cursor: pointer; */
+}
+
+.text-section h1 {
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 64px;
+    margin-bottom: 16px;
+}
+
+.text-section p {
+    width: 88%;
+    font-family: 'Zain', sans-serif;
+    margin-bottom: 32px;
+    color: #00000080;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+
+.counter-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.counter-section p {
+    font-size: 14px;
+    color: #00000080;
+}
+
+.counter-section h2 {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.left-container {
+    height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+
+.right-container {
+    display: flex;
+}
+
+.right-container .vector-img1 {
+    width: 56px;
+    height: 56px;
+    position: relative;
+    top: 220px;
+    left: 50px;
+}
+
+.right-container .vector-img2 {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 60px;
+    right: 100px;
+}
+
+.right-container img {
+    width: 500px;
+    height: 78vh;
+}
+
+.bottom-section {
+    background-color: black;
+    padding-inline: 64px;
+    padding-block: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-section img {
+    width: 130px;
+    height: 25px;
+}

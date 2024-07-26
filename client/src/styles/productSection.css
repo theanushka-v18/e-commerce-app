@@ -1,0 +1,56 @@
+.view-all a {
+    color: black;
+    border: 1px solid #00000020;
+    padding: 12px 48px;
+    border-radius: 32px;
+}
+
+.new-arrivals-section  {
+    margin-top: 128px;
+}
+
+.new-arrivals-section h1 {
+    text-align: center;
+    font-family: 'Kanit', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.new-arrivals-section .view-all {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 64px;
+}
+
+.product-cards {
+    padding: 64px;
+    display: flex;
+    gap: 16px;
+}
+
+.product-card {
+    font-family: 'Zain', sans-serif;
+}
+
+.card-bottom-section span {
+    display: flex;
+    /* font-size: 14px; */
+}
+
+.card-bottom-section p {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.card-bottom-section .price {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.card-bottom-section span .rating {
+    font-size: 14px;
+    font-weight: 600;
+    color: #00000090;
+}
