@@ -165,3 +165,154 @@ a {
 .payment-options img {
     width: 45px;
 }
+
+/* ---------------- media queries --------------- */
+
+@media only screen and (max-width: 1200px) {
+    .text-section-footer h2{
+        font-size: 36px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .text-section-footer h2 {
+        font-size: 28px;
+    }
+    .top-section-footer {
+        padding: 24px 36px;
+    }
+    .button-section input::placeholder {
+        font-size: 16px;
+    }
+    .button-section a {
+        font-size: 12px;
+    }
+    
+    .left {
+        gap: 8px;
+        margin-top: 128px;
+        width: 25%;
+    }
+    
+    .left h2 {
+        font-size: 28px;
+    }
+    
+    .social-media-icons {
+        margin-top: 8px;  
+        gap: 8px;
+    }
+    
+    .social-media-icons span {
+        padding: 4px;
+    }
+
+    .right {
+        margin-top: calc(128px + 8px);
+        gap: 32px;
+        width: 70%;
+    }
+    
+    .right p {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .right li {
+        margin-top: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .text-section-footer h2 {
+        font-size: 20px;
+    }
+    .top-section-footer {
+        padding: 20px 28px;
+    }
+    .button-section input::placeholder {
+        font-size: 14px;
+    }
+    .button-section {
+        width: 50%;
+    }
+    .button-section a {
+        font-size: 10px;
+    }
+    .button-section input {
+        padding: 12px 48px;
+    }
+    
+    .left {
+        gap: 8px;
+        margin-top: 128px;
+        width: 25%;
+    }
+    
+    .left h2 {
+        font-size: 28px;
+    }
+    
+    .social-media-icons {
+        margin-top: 8px;  
+        gap: 8px;
+    }
+    
+    .social-media-icons span {
+        padding: 4px;
+    }
+
+    .right {
+        margin-top: calc(128px + 8px);
+        gap: 32px;
+        width: 70%;
+    }
+    
+    .right p {
+        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .right li {
+        margin-top: 14px;
+    }
+    .footer-container .top-section-container, .main-footer {
+        padding-inline: 32px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .footer-container {
+        position: relative;
+        top: 100px;
+    }
+    .top-section-container {
+        position: relative;
+        top: 50px;
+    }
+   .top-section-footer {
+    flex-direction: column;
+   }
+   .top-section-footer h2 {
+    font-size: 28px;
+   }
+   .top-section-footer .text-section-footer, .button-section {
+    width: 100%;
+   }
+   .main-footer-top {
+    flex-direction: column;
+   }
+   .main-footer-top .left {
+    width: 100%;
+   }
+   .main-footer-top .right {
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 0;
+   }
+   .main-footer-bottom {
+    flex-direction: column;
+   }
+}

@@ -1,0 +1,102 @@
+.carousel-container {
+  width: 100%;
+  position: relative;
+  top: 50px;
+  text-align: center;
+  padding-inline: 64px;
+}
+
+.heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading-container h1 {
+  font-family: "Kanit", sans-serif;
+  text-transform: uppercase;
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-block: 32px;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 33.3333%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: white;
+  margin: 0 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial h3 {
+  text-align: left;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.testimonial p {
+  color: #00000090;
+  font-family: "Zain", sans-serif;
+  text-align: left;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.rating {
+  text-align: left;
+}
+.tick {
+  background-color: green;
+  color: white;
+  border-radius: 50%;
+  padding: 1px 4px;
+  font-size: 10px;
+  font-family: "Zain", sans-serif;
+}
+
+.carousel-btns {
+  display: flex;
+  gap: 16px;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ------------- media queries --------------- */
+
+@media only screen and (max-width: 768px) {
+  .heading-container h1 {
+    font-size: 36px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .carousel-container {
+    top: 200px;
+    padding-inline: 32px;
+  }
+  .heading-container h1 {
+    font-size: 28px;
+  }
+}

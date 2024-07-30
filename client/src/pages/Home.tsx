@@ -1,3 +1,4 @@
+import CustomerReviews from "../components/CustomerReviews";
 import DressStyle from "../components/DressStyle";
 import Footer from "../components/Footer";
 import HeroSection from "../components/HeroSection";
@@ -14,7 +15,7 @@ import frame39 from "../images/Frame 39.png";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <HeroSection />
       <ProductSection
@@ -56,8 +57,9 @@ const Home = () => {
         rating4='4.5'
       />
       <DressStyle />
+      <CustomerReviews />
       <Footer />
-    </div>
+    </>
   );
 };
 

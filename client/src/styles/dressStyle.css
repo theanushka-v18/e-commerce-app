@@ -1,7 +1,7 @@
 .dress-style-section {
-    padding: 64px;
+    padding-inline: 64px;
 }
-.dress-style-section div {
+.dress-style-section .dress-style-container {
     background-color: #f0f0f0;
     border-radius: 40px;
     padding: 48px;
@@ -24,4 +24,72 @@
 
 .img-section1 img {
     cursor: pointer;
+}
+
+.img-section1 img#odd-place1 {
+    width: 40%;
+}
+.img-section1 img#even-place1 {
+    width: 60%;
+}
+.img-section1 img#odd-place2 {
+    width: 60%;
+}
+.img-section1 img#even-place2 {
+    width: 40%;
+}
+
+/* ---------------- media queries --------------- */
+
+@media only screen and (max-width: 992px) {
+    .dress-style-section div {
+        padding: 36px;
+    }
+    .dress-style-section h1 {
+        font-size: 32px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .dress-style-section .dress-style-container {
+        padding: 28px;
+    }
+    .dress-style-section {
+        padding-inline: 32px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .dress-style-section h1 {
+        font-size: 28px;
+    }
+
+    .dress-style-section .dress-style-container {
+        padding: 24px;
+        position: relative;
+        top: 150px;
+    }
+    .img-section1 {
+        flex-direction: column;
+    }
+    .img-section1 img#odd-place1 {
+        width: 100%;
+        height: 250px;
+    }
+    .img-section1 img#even-place1 {
+        width: 100%;
+        height: 250px;
+    }
+    .img-section1 img#odd-place2 {
+        width: 100%;
+        height: 250px;
+    }
+    .img-section1 img#even-place2 {
+        width: 100%;
+        height: 250px;
+    }
+    .dress-style-section .dress-style-container {
+        padding: 0;
+    }
 }
