@@ -103,7 +103,7 @@
   .new-arrivals-section {
     position: relative;
     top: 150px;
-    padding-left: 32px;
+    padding-inline: 32px;
   }
 
   .card-bottom-section {
@@ -125,7 +125,7 @@
   }
 
   .product-cards {
-    padding-inline: 0;
+    /* padding-inline: 0; */
     gap: 120px;
     overflow-x: auto;
   }

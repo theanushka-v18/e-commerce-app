@@ -5,13 +5,14 @@
     background-color: #f0f0f0;
     border-radius: 40px;
     padding: 48px;
-}
+}   
 
 .dress-style-section h1 {
     text-align: center;
     text-transform: uppercase;
     font-family: 'Kanit', sans-serif;
     font-size: 48px;
+    padding-bottom: 32px;
 }
 
 .img-section1 {
@@ -47,6 +48,7 @@
     }
     .dress-style-section h1 {
         font-size: 32px;
+        padding-bottom: 0;
     }
 }
 
@@ -63,6 +65,7 @@
 @media only screen and (max-width: 600px) {
     .dress-style-section h1 {
         font-size: 28px;
+        padding-bottom: 0;
     }
 
     .dress-style-section .dress-style-container {
