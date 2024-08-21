@@ -27,13 +27,16 @@
 .product-cards {
   padding: 64px;
   display: flex;
-  gap: 16px;
-  /* justify-content: space-between; */
+  column-gap: 8px;
+  row-gap: 32px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .product-card {
   font-family: "Zain", sans-serif;
-  width: 25%;
+  width: 20%;
 }
 
 .card-bottom-section span {
@@ -128,6 +131,7 @@
     /* padding-inline: 0; */
     gap: 120px;
     overflow-x: auto;
+    flex-wrap: nowrap;
   }
   .card-img-section img {
     width: 180%;

@@ -1,0 +1,33 @@
+.modal-container {
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background-color: white;
+    border-radius: 16px;
+    padding-block: 24px;
+    position: relative;
+    top: 10%;
+}
+
+.modal-container h1 {
+    text-align: center;
+    font-family: 'Zain', sans-serif;
+}
+
+Modal {
+    border: 1px solid red;
+}
+
+.modal-container input {
+    outline: none;
+    width: 70%;
+    border: 1px solid #00000050;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: 'Zain', sans-serif;
+}

@@ -1,0 +1,196 @@
+.shopping-cart-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+}
+
+ h1 {
+    font-family: 'Kanit', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 40px;
+    padding-inline: 64px;
+    margin-top: 50px;
+}
+
+.cart-items-container {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid #00000010;
+}
+
+.product-image {
+    width: 20%;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.product-details {
+    width: 100%;
+    font-family: 'Zain', sans-serif;
+}
+
+.product-details p {
+    font-size: 12px;
+}
+
+.product-details p.product-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#product-title-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+#product-title-section span {
+    color: red;
+    cursor: pointer;
+}
+
+.product-details p span{
+    color: #00000090;
+}
+
+.product-details p.price {
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 3px;
+}
+
+.item-quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    gap: 18px;
+    background-color: #00000020;
+    border-radius: 20px;
+    position: relative;
+    top: 0px;
+  }
+
+.item-quantity-container button {
+  font-size: 20px;
+  padding: 4px;
+}
+
+.item-quantity-container p {
+  font-size: 18px;
+  color: #000;
+}
+
+.price-count-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order-summary {
+    width: 40%;
+    border: 1px solid #00000010;
+    padding: 16px;
+    font-family: 'Zain', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 10px;
+}
+
+.order-summary .pricing-section {
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 64px;
+}
+
+.order-summary .order-summary-heading {
+    font-weight: 800;
+    font-size: 24px;
+}
+.order-summary p {
+    font-size: 18px;
+}
+
+.order-summary .order-summary-label {
+    font-size: 18px;
+    color: #00000090;
+}
+
+.order-summary .order-summary-price {
+    font-weight: 600;
+}
+
+.order-summary div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-summary .total-pricing-section {
+    /* border-top: 1px solid #00000020; */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.order-summary .total-pricing-section .apply-btn {
+    font-size: 18px;
+    font-family: 'Zain', sans-serif;
+    color: white;
+    background-color: #000;
+    padding: 4px 24px;
+    border-radius: 15px;
+}
+
+.order-summary .total-pricing-section .checkout-btn {
+    font-size: 18px;
+    font-family: 'Zain', sans-serif;
+    color: white;
+    background-color: #000;
+    border-radius: 20px;
+    width: 100%;
+    padding: 8px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.order-summary .total-pricing-section input {
+    outline: none;
+    border: none;
+    background-color: #00000020;
+    padding: 2px 48px;
+    font-size: 18px;
+    font-family: 'Zain', sans-serif;
+    border-radius: 15px;
+}
+
+.divider {
+    border-top: 1px solid #00000020;
+}
+
+/* .total-pricing-section .promo-icon {
+    position: relative;
+    left: 40px;
+    color: #00000090;
+    top: 5px;
+}
+
+.total-pricing-section span.promo-icon LocalOfferIcon {
+    width: 10px;
+} */

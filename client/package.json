@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -15,6 +16,7 @@
     "@types/node": "^16.18.104",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "axios": "^1.7.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-material-ui-carousel": "^3.4.2",
@@ -27,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier ./src --write"
   },
   "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
   "browserslist": {
@@ -41,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "3.3.3"
   }
 }

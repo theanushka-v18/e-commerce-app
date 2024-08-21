@@ -1,9 +1,16 @@
 import "../styles/navbar.css";
-import { useState, MouseEvent, FocusEvent, KeyboardEvent } from "react";
+import {
+  useState,
+  MouseEvent,
+  FocusEvent,
+  KeyboardEvent,
+} from "react";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -12,10 +19,37 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+  const { loginStatus, setUserData, setIsAdmin, setLoginStatus, token } = useAuth();
+  const {selectedSize} = useCart();
   const [open, setOpen] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean>(false);
+  const [isVisible, setIsvisible] = useState<boolean>(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const openAccount = (!loginStatus && Boolean(anchorEl));
+  const handleClick = async (event:any) => {
+    if(loginStatus) {
+      try {
+        const response = await axios.get("/auth/profile", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        console.log(response.data);
+        setUserData(response.data)
+        navigate("/profile");
+      } catch (error) {
+        console.log("Cannot get user profile", error);
+      }
+    }
+    setAnchorEl(event.currentTarget);
+  };
 
   const toggleDrawer = (newOpen: boolean) => (event: MouseEvent) => {
     setOpen(newOpen);
@@ -38,18 +72,67 @@ const Navbar = () => {
     }
   };
 
+  async function getUserProfile(event:any) {
+    if(event.target.innerText == "User") {
+      localStorage.setItem('isAdmin', 'false');
+      setIsAdmin(false);
+    } else {
+      localStorage.setItem('isAdmin', 'true');
+      setIsAdmin(true);
+    }
+    
+    setAnchorEl(null);
+      if (!loginStatus) {
+        navigate("/register");
+      } else {
+        try {
+          const response = await axios.get("/auth/profile", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          console.log(response.data);
+          setUserData(response.data)
+          navigate("/profile");
+        } catch (error) {
+          console.log("Cannot get user profile", error);
+        }
+    }
+  } 
+
+  async function getCartItems() {
+    try {
+        const response = await axios.get('/products/getCartItems', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log('getCartItems = ', response.data);
+        navigate('/product/shopping-cart', {state : {selectedSize}});
+      
+      
+    } catch (error) {
+      console.log('error', error);
+      
+    }
+  }
+
   return (
     <nav>
       {/* ---------- navbar notification section starts ------------- */}
-      <div className="navbar-notification">
-        <div>
-          <p>
-            Sign up and get 20% off to your first order.{" "}
-            <a href="/">Sign Up Now</a>
-          </p>
-          <span className="close">&times;</span>
+      {isVisible && (
+        <div className="navbar-notification">
+          <div>
+            <p>
+              Sign up and get 20% off to your first order.{" "}
+              <a href="/register">Sign Up Now</a>
+            </p>
+            <span className="close" onClick={() => setIsvisible(false)}>
+              &times;
+            </span>
+          </div>
         </div>
-      </div>
+      )}
       {/* ---------- navbar notification section ends ------------- */}
 
       {/* ------------- navbar container section starts ------------  */}
@@ -78,8 +161,31 @@ const Navbar = () => {
           <input type="text" placeholder="Search for products..." />
         </div>
         <div className="navbar-icons">
+        <button onClick={getCartItems}>
           <ShoppingCartOutlinedIcon />
-          <AccountCircleOutlinedIcon />
+        </button>
+
+          <button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        <AccountCircleOutlinedIcon />
+      </button>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openAccount}
+        onClose={() => setAnchorEl(null)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem onClick={(event) => getUserProfile(event)}>User</MenuItem>
+        <MenuItem onClick={(event) => getUserProfile(event)}>Admin</MenuItem>
+      </Menu>
         </div>
       </div>
 
@@ -131,7 +237,10 @@ const Navbar = () => {
             <SearchOutlinedIcon onClick={showSearchInput(true)} />
           )}
           <ShoppingCartOutlinedIcon />
-          <AccountCircleOutlinedIcon />
+          {/* <AccountCircleOutlinedIcon
+            onClick={getUserProfile}
+          /> */}
+          
         </div>
       </div>
       {/* -------------- hamburger menu section ends ------------ */}
