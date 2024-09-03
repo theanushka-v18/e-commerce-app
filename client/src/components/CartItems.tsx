@@ -16,7 +16,7 @@ const CartItems = (props:any) => {
 
    async function handleRemoveCartItem(e:any) {
       try {
-        const response = await axios.delete(`https://e-commerce-app-nine-rho.vercel.app/products/removeCartItem/${props.cartDetails._id}`, {
+        const response = await axios.delete(`http://localhost:5000/products/removeCartItem/${props.cartDetails._id}`, {
           params : {
             userId : localStorage.getItem("id")
           }
@@ -45,7 +45,7 @@ const CartItems = (props:any) => {
 
         if (updatedCount !== productCount) {
             // console.log('updated product count', updatedCount);
-            const response = await axios.put(`https://e-commerce-app-nine-rho.vercel.app/products/updateProductCount/${props.cartDetails._id}`, {
+            const response = await axios.put(`http://localhost:5000/products/updateProductCount/${props.cartDetails._id}`, {
               productCount: updatedCount,
             }, { params: { userId: localStorage.getItem("id") } });
             props.getCartItems();

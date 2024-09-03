@@ -9,7 +9,7 @@ const UpdatePassword = () => {
 
     async function updatePassword() {
         try {
-            const response = await axios.put('https://e-commerce-app-nine-rho.vercel.app/auth/updatePassword', {
+            const response = await axios.put('http://localhost:5000/auth/updatePassword', {
                 currentPassword: currentPassword,
                 newPassword: newPassword,
                 userId : localStorage.getItem("id")

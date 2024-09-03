@@ -18,7 +18,7 @@ const AddProduct = () => {
    async function handleAddProducts() {
         if(productDesc && productImage && productName && productPrice && productRating) {
           try {
-            const response = await axios.post('https://e-commerce-app-nine-rho.vercel.app/products/addProducts', {
+            const response = await axios.post('http://localhost:5000/products/addProducts', {
                 productName,
                 productDesc,
                 productPrice,

@@ -16,7 +16,7 @@ const Payment = () => {
     async function handlePayment() {
         // Payment logic here
         try {
-          const response = await axios.put(`https://e-commerce-app-nine-rho.vercel.app/auth/payment`, {
+          const response = await axios.put(`http://localhost:5000/auth/payment`, {
             amount : Number(totalPriceSum) + 15
           },
           { params : {
@@ -28,19 +28,19 @@ const Payment = () => {
             console.log('before order history', cartItems);
             
             // create an order
-            const orderResponse = await axios.post('https://e-commerce-app-nine-rho.vercel.app/products/createOrder', {
+            const orderResponse = await axios.post('http://localhost:5000/products/createOrder', {
                 userId: localStorage.getItem("id"),
                 items: cartItems,
                 totalPrice: Number(totalPriceSum) + 15
             });
 
             // Add the order to the user's order history
-            await axios.put(`https://e-commerce-app-nine-rho.vercel.app/products/updateOrderHistory`, {
+            await axios.put(`http://localhost:5000/products/updateOrderHistory`, {
               userId: localStorage.getItem("id"),
               orderId: orderResponse.data._id
           });
 
-          await axios.delete('https://e-commerce-app-nine-rho.vercel.app/products/deleteAllCartItems', {
+          await axios.delete('http://localhost:5000/products/deleteAllCartItems', {
             params: {
               userId: localStorage.getItem("id")
             }

@@ -19,7 +19,7 @@ const ProductDetail = () => {
 
   async function handleAddItemToCart() {
     try {
-      const response = await axios.post('https://e-commerce-app-nine-rho.vercel.app/products/addProductToCart', {
+      const response = await axios.post('http://localhost:5000/products/addProductToCart', {
         userId : localStorage.getItem("id"),
         productId: productDetail?._id,
         productName: productDetail?.productName,

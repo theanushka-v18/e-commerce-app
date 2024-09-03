@@ -66,7 +66,7 @@ const Auth = () => {
       isPasswordValid(password)
     ) {
       try {
-        const response = await axios.post("https://e-commerce-app-nine-rho.vercel.app/auth/register", {
+        const response = await axios.post("http://localhost:5000/auth/register", {
           username,
           email,
           password,
@@ -94,7 +94,7 @@ const Auth = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://e-commerce-app-nine-rho.vercel.app/auth/login",
+        "http://localhost:5000/auth/login",
         {
           email,
           password,

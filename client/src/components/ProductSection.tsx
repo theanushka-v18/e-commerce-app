@@ -31,7 +31,7 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({ heading }) => {
 
   async function getProducts() {
     try {
-      const response = await axios.get("https://e-commerce-app-nine-rho.vercel.app/products/getProducts");
+      const response = await axios.get("http://localhost:5000/products/getProducts");
       setProductsData(response.data);       
     } catch (error) {
         console.log("error", error);

@@ -13,7 +13,7 @@ const ProductCard = (props:any) => {
 
   async function handleGetProductDetail() {
     try {
-      const response = await axios.get(`https://e-commerce-app-nine-rho.vercel.app/products/getProductById/${props.productId}`);
+      const response = await axios.get(`http://localhost:5000/products/getProductById/${props.productId}`);
       // console.log('response', response.data);
       
       setProductDetail(response.data);
