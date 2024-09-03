@@ -20,7 +20,7 @@ const ShoppingCart = () => {
   async function getCartItems() {
     
     try {
-         const response = await axios.get('https://e-commerce-app-murex-one.vercel.app/products/getCartItems', {
+         const response = await axios.get('https://e-commerce-app-nine-rho.vercel.app/products/getCartItems', {
           headers : {
             Authorization : `Bearer ${token}`
           },
