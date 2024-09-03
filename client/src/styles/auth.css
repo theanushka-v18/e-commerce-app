@@ -1,0 +1,61 @@
+.auth-container {
+    padding-inline: 64px;
+    position: relative;
+    top: 48px;
+}
+
+.container h1 {
+    font-size: 48px;
+    font-family: 'Zain', sans-serif;
+    font-weight: 800;
+    text-align: center;
+}
+
+.container input {
+    outline: none;
+    border: 1px solid #00000050;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: 'Zain', sans-serif;
+}
+
+.container button {
+    font-family: 'Zain', sans-serif;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.container {
+    width: 35%;
+    margin: auto;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.container p {
+    text-align: center;
+    font-family: 'Zain', sans-serif;
+}
+
+.container p a {
+    color: white;
+    font-family: 'Zain', sans-serif;
+    font-size: 24px;
+}
+
+/* --------------- media queries ----------------- */
+
+@media only screen and (max-width: 992px) {
+    .container {
+        width: 60%;
+    }
+}

@@ -1,4 +1,8 @@
 module.exports = {
     ignorePatterns: ['build/*'],
-    extends: ['react-app'],    
+    extends: [
+        "some-other-config-you-use",
+        "prettier",
+        "react-app"
+      ],    
 };
