@@ -36,13 +36,13 @@ const Navbar = () => {
   const handleClick = async (event:any) => {
     if(loginStatus) {
       try {
-        const response = await axios.get("https://e-commerce-app-murex-one.vercel.app/auth/profile", {
+        const response = await axios.get("https://e-commerce-app-nine-rho.vercel.app/auth/profile", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
 
-        const allOrders = await axios.get("https://e-commerce-app-murex-one.vercel.app/products/getOrderHistory", {
+        const allOrders = await axios.get("https://e-commerce-app-nine-rho.vercel.app/products/getOrderHistory", {
           params : {userId : localStorage.getItem("id")}
         })
         // console.log('allOrders', allOrders);
@@ -91,7 +91,7 @@ const Navbar = () => {
         navigate("/register");
       } else {
         try {
-          const response = await axios.get("https://e-commerce-app-murex-one.vercel.app/auth/profile", {
+          const response = await axios.get("https://e-commerce-app-nine-rho.vercel.app/auth/profile", {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
@@ -107,7 +107,7 @@ const Navbar = () => {
 
   async function getCartItems() {
     try {
-        const response = await axios.get('https://e-commerce-app-murex-one.vercel.app/products/getCartItems', {
+        const response = await axios.get('https://e-commerce-app-nine-rho.vercel.app/products/getCartItems', {
           headers: {
             Authorization: `Bearer ${token}`
           },

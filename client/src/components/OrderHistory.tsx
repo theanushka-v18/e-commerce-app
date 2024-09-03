@@ -25,7 +25,7 @@ const OrderHistory = (props:any) => {
             const userId = props?.cartDetails?.userId;
             console.log('productId', productId);
 
-            const response = await axios.post(`https://e-commerce-app-murex-one.vercel.app/products/${productId}/reviews`, {
+            const response = await axios.post(`https://e-commerce-app-nine-rho.vercel.app/products/${productId}/reviews`, {
                 userId: userId,
                 rating: value,
                 comment: review
