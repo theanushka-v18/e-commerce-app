@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../styles/customerReviews.css";
 import Stack from "@mui/material/Stack";
 import Rating from "@mui/material/Rating";
+import { useAuth } from "../context/AuthContext";
 
 const testimonials = [
   {
@@ -53,6 +54,15 @@ const testimonials = [
 
 const CustomerReviews = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const {productsData} = useAuth();
+
+  // const allReviews = productsData?.reduce((acc, product) => {
+  //   if (product?.reviews && product?.reviews.length > 0) {
+  //     // If the product has reviews, add them to the accumulator
+  //     return [...acc, ...product?.reviews.map(review => ({...review, productName: product?.productName}))];
+  //   }
+  //   return acc;
+  // }, []);
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -65,6 +75,9 @@ const CustomerReviews = () => {
       prevIndex < testimonials.length - 1 ? prevIndex + 1 : 0
     );
   };
+
+  // console.log('productsData', productsData);
+  
   return (
     <div className="carousel-container">
       <div className="heading-container">

@@ -20,6 +20,7 @@ const ProductDetail = () => {
   async function handleAddItemToCart() {
     try {
       const response = await axios.post('/products/addProductToCart', {
+        userId : localStorage.getItem("id"),
         productId: productDetail?._id,
         productName: productDetail?.productName,
         productPrice: productDetail?.productPrice,
@@ -29,7 +30,7 @@ const ProductDetail = () => {
         productCount: productCount,
       })
       setCartData(response.data);
-      console.log('cartData', cartData);
+      // console.log('cartData', cartData);
       if(selectedSize) {
         navigate('/product/shopping-cart', {state : {selectedSize}})
       }
@@ -46,7 +47,7 @@ const ProductDetail = () => {
       <div className="detail-container">
         <h1>{productDetail?.productName}</h1>
         <span>
-        <Rating name="half-rating-read" size="small" defaultValue={productDetail?.productRating} precision={0.5} readOnly /> <span className="rating">{productDetail?.productRating}/5</span>
+        <Rating name="half-rating-read" size="small" defaultValue={productDetail?.productRating} precision={0.5} readOnly /> <span className="rating">{productDetail?.productRating.toFixed(1)}/5</span>
         </span>
         <p className="price">{productDetail?.productPrice}</p>
         <p>{productDetail?.productDesc ? productDetail?.productDesc : "no description"}</p>  

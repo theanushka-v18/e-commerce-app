@@ -1,0 +1,94 @@
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 64px;
+    margin-top: 32px;
+}
+
+.cart-items-checkout {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Zain', sans-serif;
+}
+
+.order-summary-checkout-container {
+    width: 40%;
+}
+
+.order-summary-checkout .order-summary {
+    width: 100%;
+}
+
+.delivery-details {
+    margin-top: 16px;
+    font-family: 'Zain', sans-serif;
+}
+
+h3 {
+    padding: 0;
+    text-align: left;
+    text-transform: none;
+    /* margin-bottom: 8px; */
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.delivery-details input {
+    outline: none;
+    border: 1px solid #00000050;
+    padding: 8px 16px;
+    width: 100%;
+    border-radius: 5px;
+}
+.delivery-details button {
+    font-family: 'Zain', sans-serif;
+    font-size: 18px;
+    background-color: #000;
+    color: #fff;
+    padding: 6px 16px;
+    width: 100%;
+    margin-top: 24px;
+    border-radius: 20px;
+}
+
+.payment-container {
+    margin-top: 64px;
+    padding-inline: 64px;
+    /* border: 1px solid blue; */
+}
+
+.payment-box {
+    /* border: 1px solid red; */
+    width: 30%;
+    height: 60vh;
+    margin: auto;
+    padding: 32px;
+    background-color: #00000010;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Zain', sans-serif;
+}
+
+.payment-box h4 {
+    font-size: 24px;
+}
+
+.payment-box p.total-price {
+    font-size: 36px;
+    background-color: #fff;
+    padding: 32px 16px;
+    border-radius: 50%;
+}
+
+.payment-box button {
+    font-family: 'Zain', sans-serif;
+    background-color: #000;
+    color: #fff;
+    padding: 2px 16px;
+    border-radius: 10px;
+}

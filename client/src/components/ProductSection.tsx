@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import axios from "axios";
 import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-router-dom";
 import ViewAllProducts from "./ViewAllProducts";
+import { useAuth } from "../context/AuthContext";
 
 interface Product {
   imgSrc: string;
@@ -23,8 +24,10 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({ heading }) => {
   const [topSellingProducts, setTopSellingProducts] = useState<Product[] | null>(null);
   const [isViewAll, SetIsViewAll] = useState<boolean>(false);
 
+  // const {productsData, setProductsData} = useAuth();
+
+
   const navigate = useNavigate();
-  
 
   async function getProducts() {
     try {
@@ -52,7 +55,7 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({ heading }) => {
     }
   }, [productsData]);
 
-  console.log('productsData', productsData);
+  // console.log('productsData', productsData);
   
   
   return (

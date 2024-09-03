@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-
 }
 
  h1 {
@@ -119,6 +118,10 @@
     padding-inline: 64px;
 }
 
+.cart-container .cart-message {
+    margin-right: 40%;
+}
+
 .order-summary .order-summary-heading {
     font-weight: 800;
     font-size: 24px;
@@ -182,6 +185,14 @@
 
 .divider {
     border-top: 1px solid #00000020;
+}
+
+.cart-message {
+    font-size: 24px;
+    font-family: 'Zain', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10%;
 }
 
 /* .total-pricing-section .promo-icon {
