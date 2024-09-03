@@ -2,6 +2,52 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../jwt.js");
 const dns = require("dns");
+const nodemailer = require('nodemailer');
+require("dotenv").config();
+
+async function sendMail(username, email, purpose, otp) {
+  // create an email transporter
+  const transporter = nodemailer.createTransport({
+      service : 'gmail',
+      auth : {
+          user : process.env.USER_MAIL,
+          pass : process.env.APP_PASSWORD
+      }
+  })
+
+  // configure email content
+  let mailOptions;
+  if(purpose == 'paymentMail') {
+    mailOptions = {
+      from : process.env.USER_MAIL,
+      to : email,
+      subject : "Shop.co - Payment Successfull",
+      text : `Hi ${username}, We have recieved your payment successfully. Thank you for your purchase`
+    }
+  } else if(purpose == 'otpMail') {
+    mailOptions = {
+      from : process.env.USER_MAIL,
+      to : email,
+      subject : "Shop.co - OTP Recieved",
+      text : `Hi ${username}, Your OTP is ${otp}`
+    }
+  } else if(purpose == 'emailUpdate') {
+    mailOptions = {
+      from : process.env.USER_MAIL,
+      to : email,
+      subject : "Shop.co - Email Updated",
+      text : `Hi ${username}, Your email is updated successfully`
+    }
+  }
+
+  // send mail
+  try {
+      const result = transporter.sendMail(mailOptions);
+      console.log("Email sent successfully")
+  } catch(error) {
+      console.log('error', error)
+  }
+}
 
 function isDomainValid(domain) {
   return new Promise((resolve, reject) => {
@@ -121,9 +167,97 @@ async function handlePassportAuth(email, password, done) {
       }
 }
 
+async function handlePayment(req, res) {
+  try {
+    const {id} = req.query;
+    const {amount} = req.body;
+    const user = await User.findById(id);
+    console.log('user', user);
+    
+    const remainingAmount = user.amount - amount;
+    console.log('amount', remainingAmount);
+
+    if (remainingAmount < 0 || user.amount < amount) {
+      return res.status(400).json({ error: "Insufficient amount" });
+    }
+
+    user.amount = remainingAmount;
+    await user.save();
+    
+    // const response = await User.findByIdAndUpdate(id, , {
+    //   new: true, // it returns the updated data
+    //   runValidators: true, // it will run mongoose validators
+    // });
+    sendMail(user.username, user.email, 'paymentMail');
+    console.log('data updated');
+    // console.log(response);
+    
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({error : "Internal Server Error"});
+  }
+}
+
+async function handleUpdatePassword(req, res) {
+  try {
+    const {currentPassword, newPassword, userId} = req.body;
+    const user = await User.findById(userId);
+    const isPasswordMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordMatch) {
+      return res.status(400).json({ error: "Invalid password" });
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+    res.status(200).json(user);
+  } catch(error) {
+    res.status(500).json({message : error.message});
+  }
+}
+
+async function handleSendOtp(req, res) {
+  try {
+    const {email} = req.body;
+    const user = await User.findOne({email});
+    if (!user) {
+      res.status(404).json({message : 'user not found'});
+    }
+    const OTP = Math.floor(100000 + Math.random() * 900000);
+    user.otp = OTP;
+    await user.save();
+    sendMail(user.username, user.email, 'otpMail', OTP);
+    res.status(200).json({message : 'otp sent successfully'});
+
+  } catch(error) {
+    res.status(500).json({message : error.message});
+  }
+}
+
+async function handleUpdateEmail(req, res) {
+  try {
+    const {userId, email, otp} = req.body;
+    const user = await User.findById(userId);
+    if(!user) {
+      res.json('user not found');
+    }
+    if(user.otp == otp) {
+      user.email = email;
+    }
+    await user.save();
+    sendMail(user.username, email, 'emailUpdate')
+    res.status(200).json('email updated');
+  } catch(error) {
+    res.status(500).json({message : error.message});
+  }
+}
+
 module.exports = {
   handleRegister,
   handleLogin,
   getUserProfile,
-  handlePassportAuth
+  handlePassportAuth,
+  handlePayment,
+  handleUpdatePassword,
+  handleSendOtp,
+  handleUpdateEmail
 };
