@@ -21,7 +21,7 @@ const UpdateEmail = () => {
 
     async function getUserProfile() {
         try {
-            const response = await axios.get("/auth/profile", {
+            const response = await axios.get("https://e-commerce-app-murex-one.vercel.app/auth/profile", {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
               },
@@ -36,7 +36,7 @@ const UpdateEmail = () => {
 
     async function updateEmail() {
         try {
-            const response = await axios.put('/auth/updateEmail', {
+            const response = await axios.put('https://e-commerce-app-murex-one.vercel.app/auth/updateEmail', {
                 email : newEmail,
                 userId : localStorage.getItem("id"),
                 otp
@@ -57,7 +57,7 @@ const UpdateEmail = () => {
 
      async function handleSendOtp(e:any) {
         if(currentEmail && isEmailValid(currentEmail) && newEmail && isEmailValid(newEmail)) {
-            const response = axios.post('/auth/sendOtp', {
+            const response = axios.post('https://e-commerce-app-murex-one.vercel.app/auth/sendOtp', {
                 email : currentEmail,
                 userId : localStorage.getItem("id")
             })

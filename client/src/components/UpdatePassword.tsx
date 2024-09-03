@@ -9,7 +9,7 @@ const UpdatePassword = () => {
 
     async function updatePassword() {
         try {
-            const response = await axios.put('/auth/updatePassword', {
+            const response = await axios.put('/https://e-commerce-app-murex-one.vercel.app/auth/updatePassword', {
                 currentPassword: currentPassword,
                 newPassword: newPassword,
                 userId : localStorage.getItem("id")

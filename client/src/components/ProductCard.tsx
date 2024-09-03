@@ -13,7 +13,7 @@ const ProductCard = (props:any) => {
 
   async function handleGetProductDetail() {
     try {
-      const response = await axios.get(`/products/getProductById/${props.productId}`);
+      const response = await axios.get(`https://e-commerce-app-murex-one.vercel.app/products/getProductById/${props.productId}`);
       // console.log('response', response.data);
       
       setProductDetail(response.data);

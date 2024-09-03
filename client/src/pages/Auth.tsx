@@ -66,7 +66,7 @@ const Auth = () => {
       isPasswordValid(password)
     ) {
       try {
-        const response = await axios.post("/auth/register", {
+        const response = await axios.post("https://e-commerce-app-murex-one.vercel.app/auth/register", {
           username,
           email,
           password,
@@ -94,7 +94,7 @@ const Auth = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "/auth/login",
+        "https://e-commerce-app-murex-one.vercel.app/auth/login",
         {
           email,
           password,
