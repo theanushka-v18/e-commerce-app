@@ -19,9 +19,9 @@ const PORT = process.env.PORT;
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
 
-app.use("https://e-commerce-app-nine-rho.vercel.app/auth", authRoutes);
-app.use("https://e-commerce-app-nine-rho.vercel.app/products", productRoutes);
-app.get("https://e-commerce-app-nine-rho.vercel.app/", (req, res) => {
+app.use("/auth", authRoutes);
+app.use("/products", productRoutes);
+app.get("*", (req, res) => {
   // res.send("hi welcome to this e-commerce app");
   res.sendFile(path.join(__dirname, "../client/build", "index.html"));
 });
