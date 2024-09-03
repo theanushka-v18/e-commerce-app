@@ -8,13 +8,13 @@ import { useAuth } from "../context/AuthContext";
 const ProductCard = (props:any) => {
   const navigate = useNavigate();
   const {productDetail, setProductDetail} = useAuth();
-  console.log('props', props);
+  // console.log('props', props);
   
 
   async function handleGetProductDetail() {
     try {
       const response = await axios.get(`/products/getProductById/${props.productId}`);
-      console.log('response', response.data);
+      // console.log('response', response.data);
       
       setProductDetail(response.data);
       navigate(`/product/${response.data._id}`);
@@ -32,7 +32,7 @@ const ProductCard = (props:any) => {
         <p>{props.cardTitle}</p>
         <Stack spacing={1}>
             <span>
-                <Rating name="half-rating-read" size="small" defaultValue={props.rating} precision={0.5} readOnly /> <span className="rating">{props.rating}/5</span>
+                <Rating name="half-rating-read" size="small" defaultValue={props.rating} precision={0.5} readOnly /> <span className="rating">{props.rating.toFixed(1)}/5</span>
             </span>
         </Stack>
         <p className="price">{props.price}</p>

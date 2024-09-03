@@ -7,6 +7,8 @@ import Auth from "./pages/Auth";
 import ViewAllProducts from "./components/ViewAllProducts";
 import { useLocation } from "react-router-dom";
 import ShoppingCart from "./pages/ShoppingCart";
+import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/all-products" element={<ViewAllProductsWrapper />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/product/shopping-cart" element={<ShoppingCart />} />
+          <Route path="/checkout" element={<CheckoutWrapper />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -32,5 +36,12 @@ const ViewAllProductsWrapper = () => {
 
   return <ViewAllProducts allProducts={products} heading={heading} />;
 };
+
+const CheckoutWrapper = () => {
+  const location = useLocation();
+  const {cartItems, totalPriceSum} = location.state || {cartItems : [], totalPriceSum : 0};
+
+  return <Checkout cartItems={cartItems} totalPriceSum={totalPriceSum} />
+}
 
 export default App;

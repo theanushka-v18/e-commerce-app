@@ -52,6 +52,125 @@
     font-size: 24px;
 }
 
+.my-orders {
+    margin-top: 32px;
+    /* border: 1px solid red; */
+    padding-inline: 64px;
+    /* display: flex; */
+}
+
+.my-orders h3 {
+    text-align: left;
+    font-family: 'Kanit', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.all-orders {
+    display: flex;
+    column-gap: 32px;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+}
+
+.user-data {
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid red; */
+    align-items: center;
+    margin-top: 32px;
+    padding-inline: 64px;
+}
+
+.user-data a {
+    /* border: 1px solid blue; */
+    font-family: 'Zain', sans-serif;
+    color: black;
+    font-size: 24px;
+    /* margin-bottom: -75px; */
+    margin-top: 0;
+    text-decoration: underline;
+}
+
+.user-data h1 {
+    text-transform: capitalize;
+    font-weight: 600;
+    padding: 0;
+    /* display: inline; */
+    /* border: 1px solid green; */
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+.user-profile {
+    padding-inline: 64px;
+}
+
+.user-profile p {
+    font-family: 'Zain', sans-serif;
+    font-size: 20px;
+}
+
+.user-profile p span {
+    font-weight: bold;
+}
+
+.user-profile button {
+    font-size: 16px;
+    font-family: 'Zain', sans-serif;
+    background-color: black;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-top: 16px;
+    width: 40%;
+    margin-right: 16px;
+}
+
+.user-data2 {
+    /* border: 1px solid red; */
+    padding: 16px;
+    border-radius: 10px;
+    background-color: #00000010;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+}
+.update-password-modal-container {
+    background-color: #fff;
+    width: 40%;
+    margin: auto;
+    margin-top: 20%;
+    padding: 32px;
+    border-radius: 10px;
+}
+
+.update-password-modal-container h2 {
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.update-password-modal-container input {
+    outline: none;
+    border: 1px solid #00000020;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.update-password-modal-container button {
+    font-family: 'Zain', sans-serif;
+    font-size: 16px;
+    background-color: black;
+    color: #fff;
+    margin-right: 8px;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
 /* --------------- media queries ----------------- */
 
 @media only screen and (max-width: 992px) {

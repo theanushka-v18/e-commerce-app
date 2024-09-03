@@ -26,7 +26,7 @@ const AddProduct = () => {
                 productRating,
                 productCategory
             })
-            console.log(response);
+            // console.log(response);
             setProductDesc("");
             setProductPrice("");
             setProductName("");

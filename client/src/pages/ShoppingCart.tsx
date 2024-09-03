@@ -5,18 +5,27 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 // import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const {token, loginStatus} = useAuth();
+  const {cartItems, setCartItems} = useCart();
+
+  const navigate = useNavigate();
+
   async function getCartItems() {
     
     try {
          const response = await axios.get('/products/getCartItems', {
           headers : {
             Authorization : `Bearer ${token}`
+          },
+          params : {
+            userId : localStorage.getItem("id")
           }
          });         
          setCartItems(response.data);
@@ -29,7 +38,7 @@ const ShoppingCart = () => {
     getCartItems();
   }, []);
 
-  let totalPrice = cartItems.map((cartItem : any) => {
+  let totalPrice = cartItems?.map((cartItem : any) => {
     let priceString = cartItem?.productPrice;
 let number = parseInt(priceString.replace('$', ''), 10);
     // console.log('cartItems', cartItems);
@@ -37,10 +46,13 @@ let number = parseInt(priceString.replace('$', ''), 10);
     return Number(number) * cartItem?.productCount;
   })
 
-  let totalPriceSum = totalPrice.reduce((acc, price) => {
+  let totalPriceSum = totalPrice?.reduce((acc, price) => {
     return acc + price;
   }, 0);
   
+  function handleCheckout() {
+    navigate('/checkout', {state : {cartItems, totalPriceSum}});
+  }
 
   return (
       <>
@@ -51,11 +63,11 @@ let number = parseInt(priceString.replace('$', ''), 10);
             <div className="shopping-cart-container">
               {
                 cartItems?.map((cartItem) => {
-                  return <CartItems setCartItems={setCartItems} cartDetails={cartItem} getCartItems={getCartItems} />
+                  return <CartItems cartDetails={cartItem} getCartItems={getCartItems} />
                 })
               }
             </div>
-            {cartItems.length > 0 ? (
+            {cartItems?.length > 0 ? (
                 <div className="order-summary">
                 <div className='pricing-section'>
                   <p className='order-summary-heading'>Order Summary</p>
@@ -82,17 +94,17 @@ let number = parseInt(priceString.replace('$', ''), 10);
                     <button className='apply-btn'>Apply</button>
                   </div>
                   <div>
-                    <button className='checkout-btn'><span>Go to Checkout</span> <ArrowRightAltIcon /> </button>
+                    <button className='checkout-btn' onClick={handleCheckout}><span>Go to Checkout</span> <ArrowRightAltIcon /> </button>
                   </div>
                 </div>
               </div>
               ) : (
-                <p>Your cart is empty</p>
+                <p className='cart-message'>Your cart is empty</p>
               )}
         </div>
         </>
         ) : (
-          <p>Please login to view your cart</p>
+          <p className='cart-message'>Please login to view your cart</p>
         )}
       </>
   )

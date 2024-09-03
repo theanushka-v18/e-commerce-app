@@ -41,9 +41,14 @@ const Navbar = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log(response.data);
+
+        const allOrders = await axios.get("/products/getOrderHistory", {
+          params : {userId : localStorage.getItem("id")}
+        })
+        // console.log('allOrders', allOrders);
+        
         setUserData(response.data)
-        navigate("/profile");
+        navigate("/profile", {state : { userData: response.data, allOrders: allOrders.data }});
       } catch (error) {
         console.log("Cannot get user profile", error);
       }
@@ -91,9 +96,9 @@ const Navbar = () => {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           });
-          console.log(response.data);
+          // console.log(response.data);
           setUserData(response.data)
-          navigate("/profile");
+          navigate("/profile", {state : response.data});
         } catch (error) {
           console.log("Cannot get user profile", error);
         }
@@ -105,9 +110,12 @@ const Navbar = () => {
         const response = await axios.get('/products/getCartItems', {
           headers: {
             Authorization: `Bearer ${token}`
+          },
+          params : {
+            userId : localStorage.getItem("id")
           }
         });
-        console.log('getCartItems = ', response.data);
+        // console.log('getCartItems = ', response.data);
         navigate('/product/shopping-cart', {state : {selectedSize}});
       
       

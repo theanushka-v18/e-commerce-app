@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
     },
     email : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     password : {
         type : String,
@@ -17,6 +18,17 @@ const userSchema = new mongoose.Schema({
     role : {
         type : String,
         required : true
+    },
+    amount : {
+        type : Number,
+        default : 5000
+    },
+    orderHistory: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'OrderHistory'
+    }],
+    otp : {
+        type : Number,
     }
 })
 

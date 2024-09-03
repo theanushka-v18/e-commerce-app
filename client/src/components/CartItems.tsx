@@ -8,12 +8,19 @@ const CartItems = (props:any) => {
     const {productCount, setProductCount} = useCart();
     const navigate = useNavigate();
     const location = useLocation();
-  const {selectedSize} = location?.state || null;
+    
+  if(!props?.profile) {
+    const {selectedSize} = location?.state || null;
+  }
     // console.log('product detail', props.cartDetails._id);
 
    async function handleRemoveCartItem(e:any) {
       try {
-        const response = await axios.delete(`/products/removeCartItem/${props.cartDetails._id}`);
+        const response = await axios.delete(`/products/removeCartItem/${props.cartDetails._id}`, {
+          params : {
+            userId : localStorage.getItem("id")
+          }
+        });
         navigate(0);
       } catch(error) {
         console.log('error', error);
@@ -37,18 +44,18 @@ const CartItems = (props:any) => {
         }
 
         if (updatedCount !== productCount) {
-            console.log('updated product count', updatedCount);
+            // console.log('updated product count', updatedCount);
             const response = await axios.put(`/products/updateProductCount/${props.cartDetails._id}`, {
-                productCount: updatedCount
-            });
+              productCount: updatedCount,
+            }, { params: { userId: localStorage.getItem("id") } });
             props.getCartItems();
-            console.log('API response:', response.data);
+            // console.log('API response:', response.data);
         }
         
       } catch(error) {
         console.log('error', error);
       }
-    }
+    }    
     
   return (
     <div className="cart-items-container">
@@ -58,19 +65,25 @@ const CartItems = (props:any) => {
       <div className="product-details">
         <div id="product-title-section">
             <p className='product-title'>{props?.cartDetails?.productName}</p>
-            <span onClick={(e) => handleRemoveCartItem(e)}>
+            {!props?.checkout && (
+              <span onClick={(e) => handleRemoveCartItem(e)}>
                 <DeleteIcon />
-            </span>
+              </span>
+            )}
         </div>
-        <p>Size: <span>{selectedSize}</span></p>
+        {/* {props?.props && <p>Size: <span>{selectedSize}</span></p>} */}
         <p>Color: <span>Black</span></p>
           <div className="price-count-container">
           <p className="price">{props?.cartDetails?.productPrice}</p>
-        <div className="item-quantity-container">
+        {!props?.checkout ? (
+          <div className="item-quantity-container">
             <button onClick={(e) => handleUpdateProductCount(e)}>-</button>
             <p>{props?.cartDetails?.productCount}</p>
             <button onClick={(e) => handleUpdateProductCount(e)}>+</button>
           </div>
+        ) : (
+          <h4>Quantity: {props?.cartDetails?.productCount}</h4>
+        )}
           </div>
       </div>
     </div>

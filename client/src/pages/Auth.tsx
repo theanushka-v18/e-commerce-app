@@ -1,20 +1,35 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "../styles/auth.css";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import Modal from '@mui/material/Modal';
 import AddProduct from "../components/AddProduct";
+import { useCart } from "../context/CartContext";
+// import CartItems from "../components/CartItems";
+import OrderHistory from "../components/OrderHistory";
+import UpdatePassword from "../components/UpdatePassword";
+import UpdateEmail from "../components/UpdateEmail";
 
 const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [open, setOpen] = useState(false);
+  // const [openUpdatePasswordModal, setOpenUpdatePasswordModal] = useState(false);
+
+
+  const location = useLocation();
+
+  const { userData = {}, allOrders = [] } = location.state || {};
+  console.log('location.state', location.state);
+  
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { setToken, setLoginStatus, loginStatus, token, userData, isAdmin, setUserData } = useAuth();
+  const { setToken, setLoginStatus, loginStatus, token, isAdmin, setUserData, setAmount } = useAuth();
+  const {orderHistory} = useCart();
 
   const navigate = useNavigate();
   const { auth } = useParams();
@@ -58,11 +73,14 @@ const Auth = () => {
           role : isAdmin ? "admin" : "user",
           isAdmin 
         });
-        // console.log(response.data);
+        // console.log('amount', response.data.response.amount);
         setToken(response.data.token);
         setLoginStatus(true);
+        setAmount(response.data.response.amount);
+        localStorage.setItem("amount", response.data.response.amount);
         localStorage.setItem("loginStatus", "true");
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("id", response.data.response._id);
         navigate("/");
       } catch (error) {
         console.log("Registration Failed", error);
@@ -95,6 +113,8 @@ const Auth = () => {
       setLoginStatus(true);
       localStorage.setItem("loginStatus", "true");
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("amount", response.data.user.amount);
+      localStorage.setItem("id", response.data.user._id);
       navigate("/");
     } catch (error) {
       console.log("Login Failed", error);
@@ -105,16 +125,11 @@ const Auth = () => {
   function handleLogout() {
     setLoginStatus(false);
     localStorage.setItem("loginStatus", "false");
+    localStorage.setItem("amount", "null");
+    localStorage.setItem("id", "null");
   }
 
-  // useEffect(() => {
-  //   console.log("loginstatus", loginStatus);
-  //   console.log("token", token);
-  //   console.log(auth);
-  // }, [token, loginStatus]);
-
-  // console.log('isAdmin', isAdmin);
-  
+  // console.log('orderHistory', orderHistory);
 
   return (
     <>
@@ -180,15 +195,32 @@ const Auth = () => {
           )}
         </div>
       ) : (
-        <>
-          <h1>
-            User data{" "}
+        <div className="user-profile">
+          <div className="user-data">
+            <h1>User profile{" "}</h1>
             <a href="/login" onClick={handleLogout}>
-              logout
+              Logout
             </a>
-          </h1>
-          <p>Username : {userData.username}</p>
-          <p>Email : {userData.email}</p>
+          </div>
+          <div className="user-data2">
+            <p><span>Username :</span> {userData?.username}</p>
+            <p><span>Email :</span> {userData?.email}</p>
+            <p><span>Amount :</span> {userData?.amount}</p>
+            
+            <UpdatePassword />
+            <UpdateEmail />
+          </div>
+
+          <div className="my-orders">
+            <h3>Order History</h3>
+            <div className="all-orders">
+              {
+                allOrders?.map((order:any) => {
+                    return <OrderHistory cartDetails={order} profile={true} />
+                })
+              }
+            </div>
+          </div>
 
           {isAdmin && (
             <>
@@ -203,7 +235,7 @@ const Auth = () => {
       </Modal>
             </>
           )}
-        </>
+        </div>
       )}
     </>
   );
