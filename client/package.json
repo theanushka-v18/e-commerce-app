@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
+  "proxy": "https://e-commerce-app-murex-one.vercel.app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.0",
