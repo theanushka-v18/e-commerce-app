@@ -21,17 +21,17 @@ const productRoutes = require("./routes/product");
 
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
-app.get("*", (req, res) => {
-  // res.send("hi welcome to this e-commerce app");
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
-});
+
 
 
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "../client/build")));
 
-
+app.get("*", (req, res) => {
+  // res.send("hi welcome to this e-commerce app");
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 app.use(passport.initialize());
 
