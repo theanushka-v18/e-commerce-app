@@ -37,22 +37,22 @@ interface ProductDetail {
   [key: string]: any; // Add other fields as necessary
 }
 
-// interface Review {
-//   name: string;
-//   comment: string;
-//   rating: number;
-// }
-// interface Product {
-//   _id: string;
-//   productName: string;
-//   productDesc: string;
-//   productPrice: string;
-//   productImage: string;
-//   productRating: number;
-//   productCategory: string;
-//   reviews?: Review[]; // Add reviews field
-//   [key: string]: any; // Allow additional fields
-// }
+interface Review {
+  name: string;
+  comment: string;
+  rating: number;
+}
+interface Product {
+  _id: string;
+  productName: string;
+  productDesc: string;
+  productPrice: string;
+  productImage: string;
+  productRating: number;
+  productCategory: string;
+  reviews?: Review[]; // Add reviews field
+  [key: string]: any; // Allow additional fields
+}
 
 interface AuthContextType {
   token: string | null;
@@ -69,8 +69,10 @@ interface AuthContextType {
   setPaymentSuccessfull : (paymentSuccessfull : boolean) => void;
   productDetail: ProductDetail | null;
   setProductDetail: (productDetail: ProductDetail | null) => void;
-  // productsData : Product[] | null;
-  // setProductsData: (update: ((prevProductsData: Product[] | null) => Product[] | null) | Product[] | null) => void;
+  productsData : Product[] | null;
+  setProductsData: (update: ((prevProductsData: Product[] | null) => Product[] | null) | Product[] | null) => void;
+  searchQuery : string | "";
+  setSearchQuery : (searchQuery : string | "") => void;
 
 }
 
@@ -94,7 +96,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     return savedStatus ? JSON.parse(savedStatus) : false;
   });
 
-  // const [productsData, setProductsData] = useState<Product[] | null>(null);
+  const [productsData, setProductsData] = useState<Product[] | null>(null);
 
   //   const [loginStatus, setLoginStatus] = useState<boolean>(
   //     JSON.parse(localStorage.getItem("loginStatus") || "false")
@@ -110,6 +112,8 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const savedStatus = localStorage.getItem("paymentSuccessfull");
     return savedStatus ? JSON.parse(savedStatus) : false;
   });
+
+  const [searchQuery, setSearchQuery] = useState<string | "">("");
 
   return (
     <AuthContext.Provider
@@ -128,8 +132,10 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setAmount,
         paymentSuccessfull,
         setPaymentSuccessfull,
-        // productsData,
-        // setProductsData
+        productsData,
+        setProductsData,
+        searchQuery,
+        setSearchQuery
       }}
     >
       {children}

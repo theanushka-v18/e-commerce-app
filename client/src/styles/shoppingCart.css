@@ -205,3 +205,23 @@
 .total-pricing-section span.promo-icon LocalOfferIcon {
     width: 10px;
 } */
+
+/* --------------------- media queries ---------------------- */
+
+@media only screen and (max-width: 1024px) {
+    .shopping-cart-container {
+        width: 50%;
+    }
+}
+@media only screen and (max-width: 992px) {
+    .cart-container {
+        display: block;
+    }
+    .shopping-cart-container {
+        width: 100%;
+        margin-bottom: 32px;
+    }
+    .order-summary {
+        width: 100%;
+    }
+}

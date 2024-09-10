@@ -9,6 +9,8 @@ import { useLocation } from "react-router-dom";
 import ShoppingCart from "./pages/ShoppingCart";
 import Checkout from "./pages/Checkout";
 import Payment from "./pages/Payment";
+import Category from "./components/Category";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -23,8 +25,10 @@ function App() {
           <Route path="/product/shopping-cart" element={<ShoppingCart />} />
           <Route path="/checkout" element={<CheckoutWrapper />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/category" element={<Category />} />
         </Routes>
         <Footer />
+        <ToastContainer />
       </BrowserRouter>
     </div>
   );
@@ -39,9 +43,9 @@ const ViewAllProductsWrapper = () => {
 
 const CheckoutWrapper = () => {
   const location = useLocation();
-  const {cartItems, totalPriceSum} = location.state || {cartItems : [], totalPriceSum : 0};
+  const {cartItems, totalPriceSum, selectedColor, selectedSize} = location.state || {cartItems : [], totalPriceSum : 0, selectedColor: "", selectedSize: ""};
 
-  return <Checkout cartItems={cartItems} totalPriceSum={totalPriceSum} />
+  return <Checkout cartItems={cartItems} totalPriceSum={totalPriceSum} selectedColor={selectedColor} selectedSize={selectedSize} />
 }
 
 export default App;

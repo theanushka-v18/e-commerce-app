@@ -92,3 +92,27 @@ h3 {
     padding: 2px 16px;
     border-radius: 10px;
 }
+
+/* ------------------ media queries ---------------------- */
+
+@media only screen and (max-width: 992px) {
+    .payment-box {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .checkout-container {
+        display: block;
+    }
+    .cart-items-checkout {
+        width: 100%;
+    }
+    .order-summary-checkout-container {
+        width: 100%;
+        margin-top: 32px;
+    }
+    .payment-box {
+        width: 80%;
+    }
+}

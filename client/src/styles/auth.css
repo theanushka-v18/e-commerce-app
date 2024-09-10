@@ -9,6 +9,7 @@
     font-family: 'Zain', sans-serif;
     font-weight: 800;
     text-align: center;
+    margin-top: 0;
 }
 
 .container input {
@@ -171,10 +172,45 @@
     border-radius: 5px;
 }
 
+.upload-product-button {
+    width: 13%!important;
+    font-size: 20px!important;
+    margin-left: 64px;
+    padding: 6px 16px!important;
+}
+
 /* --------------- media queries ----------------- */
 
 @media only screen and (max-width: 992px) {
     .container {
         width: 60%;
+    }
+    .user-data2 {
+        width: 70%;
+    }
+    .user-profile {
+        padding-inline: 32px;
+    }
+    .all-orders {
+        justify-content: center;
+    }
+    .all-orders .order-history-container {
+        width: 40%;
+    }
+    .update-password-modal-container {
+        width: 60%;
+        margin-top: 40%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .all-orders .order-history-container {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
     }
 }

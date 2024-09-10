@@ -23,6 +23,11 @@ const ProductCard = (props:any) => {
     }
   }
 
+  const rating = props.rating ?? 0;
+
+  console.log('props', props);
+  
+
   return (
     <div className='product-card' onClick={handleGetProductDetail}>
       <div className="card-img-section">
@@ -32,7 +37,7 @@ const ProductCard = (props:any) => {
         <p>{props.cardTitle}</p>
         <Stack spacing={1}>
             <span>
-                <Rating name="half-rating-read" size="small" defaultValue={props.rating} precision={0.5} readOnly /> <span className="rating">{props.rating.toFixed(1)}/5</span>
+                <Rating name="half-rating-read" size="small" defaultValue={rating} precision={0.5} readOnly /> <span className="rating">{rating?.toFixed(1)}/5</span>
             </span>
         </Stack>
         <p className="price">{props.price}</p>

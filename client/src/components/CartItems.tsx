@@ -2,6 +2,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useCart } from '../context/CartContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Bounce, toast } from 'react-toastify';
 
 const CartItems = (props:any) => {
     // console.log(props);
@@ -15,15 +16,37 @@ const CartItems = (props:any) => {
     // console.log('product detail', props.cartDetails._id);
 
    async function handleRemoveCartItem(e:any) {
+    e.preventDefault();
       try {
         const response = await axios.delete(`http://localhost:5000/products/removeCartItem/${props.cartDetails._id}`, {
           params : {
             userId : localStorage.getItem("id")
           }
         });
-        navigate(0);
-      } catch(error) {
-        console.log('error', error);
+        navigate('/');
+        toast.success('Product deleted from the cart successfully', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          transition: Bounce,
+        });
+      } catch(error:any) {
+        toast.error(error.response.data, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          transition: Bounce,
+        });
         
       }
       // console.log('remove cart item', props.cartDetails._id);
@@ -56,6 +79,10 @@ const CartItems = (props:any) => {
         console.log('error', error);
       }
     }    
+
+    console.log('cartDetails',  props.cartDetails);
+
+    
     
   return (
     <div className="cart-items-container">
@@ -71,8 +98,8 @@ const CartItems = (props:any) => {
               </span>
             )}
         </div>
-        {/* {props?.props && <p>Size: <span>{selectedSize}</span></p>} */}
-        <p>Color: <span>Black</span></p>
+        <p>Size: <span>{props?.cartDetails?.productSize}</span></p>
+        <p>Color: <span>{props?.cartDetails?.productColor}</span></p>
           <div className="price-count-container">
           <p className="price">{props?.cartDetails?.productPrice}</p>
         {!props?.checkout ? (

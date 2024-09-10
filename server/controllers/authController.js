@@ -116,7 +116,7 @@ async function handleLogin(req, res) {
 
     // if user doesn't exist or password doesn't match return error
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return res.status(401).json("Invalid email or password");
     }
 
     if((isAdmin && user.role == "admin") || (!isAdmin && user.role == "user")) {
@@ -136,7 +136,7 @@ async function handleLogin(req, res) {
 
     
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json("Internal server error");
   }
 }
 

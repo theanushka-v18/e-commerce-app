@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import { useCart } from "../context/CartContext";
+import { Bounce, toast } from "react-toastify";
 
 const Payment = () => {
     const location = useLocation();
@@ -25,7 +26,7 @@ const Payment = () => {
 
           if (response.status === 200) {
             setOrderHistory((prevOrderHistory) => [...prevOrderHistory, ...cartItems]);
-            console.log('before order history', cartItems);
+            // console.log('before order history', cartItems);
             
             // create an order
             const orderResponse = await axios.post('http://localhost:5000/products/createOrder', {
@@ -48,22 +49,66 @@ const Payment = () => {
     
           // setOrderHistory((prevOrderHistory) => [...prevOrderHistory, ...cartItems]);
 
-            console.log(cartItems);
+            // console.log(cartItems);
     
             setPaymentSuccessfull(true);
+            toast.success('Payment Successfull', {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'colored',
+              transition: Bounce,
+            });
             localStorage.setItem("amount", response.data.amount);
           }
         } catch (error) {
           if (axios.isAxiosError(error)) {  // Check if error is an AxiosError
             if (error.response && error.response.status === 400) {
               setErrorMessage("Insufficient amount to make this purchase.");
+              toast.error('Insufficient amount to make this purchase.', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored',
+                transition: Bounce,
+              });
             } else {
-              console.log('error', error);
+              // console.log('error', error);
               setErrorMessage("An error occurred while processing your payment.");
+              toast.error('An error occurred while processing your payment.', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored',
+                transition: Bounce,
+              });
             }
           } else {
-            console.log('error', error);
+            // console.log('error', error);
             setErrorMessage("An unexpected error occurred.");
+            toast.error('An unexpected error occurred.', {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'colored',
+              transition: Bounce,
+            });
           }
         }
     }

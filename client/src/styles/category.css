@@ -1,0 +1,84 @@
+.category-container {
+    /* border: 1px solid red; */
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 64px;
+    column-gap: 32px;
+    border-top: 1px solid #00000020;
+}
+
+.filter-container {
+    border: 1px solid #00000020;
+    width: 20%;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 32px;
+}
+
+.products-container {
+    margin-top: 32px;
+    /* border: 1px solid green; */
+    width: 80%;
+}
+
+.product-cards {
+    padding: 32px 64px;
+}
+
+.products-container h2 {
+    margin-left: 64px;
+    font-family: 'Kanit', sans-serif;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.filter-container .filter-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-container h3 {
+    font-size: 18px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.filter-container .filter-heading svg {
+    color: gray;
+}
+
+.filter-container .divider {
+    width: 100%;
+    border: 1px solid #00000020;
+    margin-block: 16px;
+    border-top: none;
+}
+
+.filter-container .size-section {
+    margin-top: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-container .product-color-container {
+    border: none;
+}
+
+.apply-button {
+    margin-top: 44px;
+}
+
+.filter-container .apply-button button {
+    font-size: 18px;
+    font-family: 'Zain', sans-serif;
+    /* margin-top: 32px; */
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    width: 100%;
+    border-radius: 20px;
+}

@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 app.set("view engine", "ejs");
 
-const PORT = process.env.PORT || 3000;  // or simply 3000
+const PORT = process.env.PORT; 
 
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");

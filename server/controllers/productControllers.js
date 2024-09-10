@@ -247,7 +247,7 @@ async function handleGetOrderHistory(req, res) {
     const {userId} = req.query;
     const user = await User.findById(userId);
     const allOrders = await Promise.all(
-      user.orderHistory.map(async (orderId) => {
+      user?.orderHistory?.map(async (orderId) => {
         const order = await OrderHistory.findById(orderId);
         return order;
       })

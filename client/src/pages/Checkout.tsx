@@ -7,11 +7,14 @@ import { useState } from "react";
 interface CheckoutProps {
     cartItems: any[];  
     totalPriceSum: number;
+    selectedColor: string,
+    selectedSize: string
   }
 
-const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPriceSum }) => {
+const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPriceSum, selectedColor, selectedSize }) => {
     const [address, setAddress] = useState("");
     const navigate = useNavigate();
+    
     function navigateToPayment() {
         if(address) {
             navigate('/payment', {state : {totalPriceSum}});
@@ -23,7 +26,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPriceSum }) => {
         {/* <h3>Cart Items ({cartItems.length})</h3> */}
             {
             cartItems?.map((cartItem) => {
-                return <CartItems cartDetails={cartItem} checkout={true} />
+                return <CartItems cartDetails={cartItem} checkout={true} selectedColor={selectedColor} selectedSize={selectedSize} />
             })
             }
       </div>

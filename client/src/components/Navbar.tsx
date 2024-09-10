@@ -1,56 +1,67 @@
-import "../styles/navbar.css";
-import {
-  useState,
-  MouseEvent,
-  FocusEvent,
-  KeyboardEvent,
-} from "react";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import MenuIcon from "@mui/icons-material/Menu";
+import '../styles/navbar.css';
+import { useState, MouseEvent, FocusEvent, KeyboardEvent } from 'react';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import axios from "axios";
-import { useCart } from "../context/CartContext";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
+import { useCart } from '../context/CartContext';
+import { Bounce, toast } from 'react-toastify';
 
 const Navbar = () => {
-  const { loginStatus, setUserData, setIsAdmin, setLoginStatus, token } = useAuth();
-  const {selectedSize} = useCart();
+  const {
+    loginStatus,
+    setUserData,
+    setIsAdmin,
+    setLoginStatus,
+    token,
+    searchQuery,
+    setSearchQuery,
+  } = useAuth();
+  const { selectedSize } = useCart();
   const [open, setOpen] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [isVisible, setIsvisible] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  const openAccount = (!loginStatus && Boolean(anchorEl));
-  const handleClick = async (event:any) => {
-    if(loginStatus) {
+  const openAccount = !loginStatus && Boolean(anchorEl);
+
+  const handleClick = async (event: any) => {
+    // const {} = useAuth();
+    if (loginStatus) {
       try {
-        const response = await axios.get("http://localhost:5000/auth/profile", {
+        const response = await axios.get('http://localhost:5000/auth/profile', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         });
 
-        const allOrders = await axios.get("http://localhost:5000/products/getOrderHistory", {
-          params : {userId : localStorage.getItem("id")}
-        })
+        const allOrders = await axios.get(
+          'http://localhost:5000/products/getOrderHistory',
+          {
+            params: { userId: localStorage.getItem('id') },
+          }
+        );
         // console.log('allOrders', allOrders);
-        
-        setUserData(response.data)
-        navigate("/profile", {state : { userData: response.data, allOrders: allOrders.data }});
+
+        setUserData(response.data);
+        navigate('/profile', {
+          state: { userData: response.data, allOrders: allOrders.data },
+        });
       } catch (error) {
-        console.log("Cannot get user profile", error);
+        console.log('Cannot get user profile', error);
       }
     }
     setAnchorEl(event.currentTarget);
@@ -67,61 +78,74 @@ const Navbar = () => {
   const handleSearchInput = (
     event: FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>
   ) => {
-    if (event.type === "blur") {
+    if (event.type === 'blur') {
       setShowInput(false);
     } else if (
-      event.type === "keydown" &&
-      (event as KeyboardEvent).key === "Enter"
+      event.type === 'keydown' &&
+      (event as KeyboardEvent).key === 'Enter'
     ) {
       setShowInput(false);
     }
   };
 
-  async function getUserProfile(event:any) {
-    if(event.target.innerText == "User") {
+  async function getUserProfile(event: any) {
+    if (event.target.innerText == 'User') {
       localStorage.setItem('isAdmin', 'false');
       setIsAdmin(false);
     } else {
       localStorage.setItem('isAdmin', 'true');
       setIsAdmin(true);
     }
-    
+
     setAnchorEl(null);
-      if (!loginStatus) {
-        navigate("/register");
-      } else {
-        try {
-          const response = await axios.get("http://localhost:5000/auth/profile", {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          });
-          // console.log(response.data);
-          setUserData(response.data)
-          navigate("/profile", {state : response.data});
-        } catch (error) {
-          console.log("Cannot get user profile", error);
-        }
+    if (!loginStatus) {
+      navigate('/register');
+    } else {
+      try {
+        const response = await axios.get('http://localhost:5000/auth/profile', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        // console.log(response.data);
+        setUserData(response.data);
+        navigate('/profile', { state: response.data });
+      } catch (error) {
+        console.log('Cannot get user profile', error);
+      }
     }
-  } 
+  }
 
   async function getCartItems() {
     try {
-        const response = await axios.get('http://localhost:5000/products/getCartItems', {
+      const response = await axios.get(
+        'http://localhost:5000/products/getCartItems',
+        {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
-          params : {
-            userId : localStorage.getItem("id")
-          }
+          params: {
+            userId: localStorage.getItem('id'),
+          },
+        }
+      );
+      // console.log('getCartItems = ', response.data);
+      if(!loginStatus) {
+        toast.info('Please login to view your cart', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+          transition: Bounce,
         });
-        // console.log('getCartItems = ', response.data);
-        navigate('/product/shopping-cart', {state : {selectedSize}});
-      
-      
+      }
+      navigate('/product/shopping-cart', { state: { selectedSize } });
     } catch (error) {
       console.log('error', error);
-      
     }
   }
 
@@ -129,13 +153,13 @@ const Navbar = () => {
     <nav>
       {/* ---------- navbar notification section starts ------------- */}
       {isVisible && (
-        <div className="navbar-notification">
+        <div className='navbar-notification'>
           <div>
             <p>
-              Sign up and get 20% off to your first order.{" "}
-              <a href="/register">Sign Up Now</a>
+              Sign up and get 20% off to your first order.{' '}
+              <a href='/register'>Sign Up Now</a>
             </p>
-            <span className="close" onClick={() => setIsvisible(false)}>
+            <span className='close' onClick={() => setIsvisible(false)}>
               &times;
             </span>
           </div>
@@ -144,78 +168,85 @@ const Navbar = () => {
       {/* ---------- navbar notification section ends ------------- */}
 
       {/* ------------- navbar container section starts ------------  */}
-      <div className="navbar-container">
+      <div className='navbar-container'>
         <h2>SHOP.CO</h2>
-        <div className="menu-links">
+        <div className='menu-links'>
           <ul>
             <li>
-              <a href="/">Shop</a>
+              <a href='/'>Shop</a>
             </li>
             <li>
-              <a href="/">On Sale</a>
+              <a href='/'>On Sale</a>
             </li>
             <li>
-              <a href="/">New Arrivals</a>
+              <a href='/'>New Arrivals</a>
             </li>
             <li>
-              <a href="/">Brands</a>
+              <a href='/'>Brands</a>
             </li>
           </ul>
         </div>
-        <div className="navbar-input">
-          <span className="search-icon">
+        <div className='navbar-input'>
+          <span className='search-icon'>
             <SearchOutlinedIcon />
           </span>
-          <input type="text" placeholder="Search for products..." />
+          <input
+            type='text'
+            placeholder='Search for products...'
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
-        <div className="navbar-icons">
-        <button onClick={getCartItems}>
-          <ShoppingCartOutlinedIcon />
-        </button>
+        <div className='navbar-icons'>
+          <button onClick={getCartItems}>
+            <ShoppingCartOutlinedIcon />
+          </button>
 
           <button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <AccountCircleOutlinedIcon />
-      </button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={openAccount}
-        onClose={() => setAnchorEl(null)}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={(event) => getUserProfile(event)}>User</MenuItem>
-        <MenuItem onClick={(event) => getUserProfile(event)}>Admin</MenuItem>
-      </Menu>
+            id='basic-button'
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+          >
+            <AccountCircleOutlinedIcon />
+          </button>
+          <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
+            open={openAccount}
+            onClose={() => setAnchorEl(null)}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={(event) => getUserProfile(event)}>User</MenuItem>
+            <MenuItem onClick={(event) => getUserProfile(event)}>
+              Admin
+            </MenuItem>
+          </Menu>
         </div>
       </div>
 
       {/* -------------- hamburger menu section starts ------------ */}
-      <div className="navbar-small-devices">
+      <div className='navbar-small-devices'>
         <div>
-          <div className="hamburger-menu-container">
-            <Button className="hamburger-menu-btn" onClick={toggleDrawer(true)}>
+          <div className='hamburger-menu-container'>
+            <Button className='hamburger-menu-btn' onClick={toggleDrawer(true)}>
               <MenuIcon />
             </Button>
-            <Drawer className="hamburger-menu-drawer" open={open}>
+            <Drawer className='hamburger-menu-drawer' open={open}>
               <div
-                className="close-hamburger-menu"
+                className='close-hamburger-menu'
                 onClick={toggleDrawer(false)}
               >
                 &times;
               </div>
-              <Box sx={{ width: 250 }} role="presentation">
+              <Box sx={{ width: 250 }} role='presentation'>
                 <List>
-                  {["Shop", "On Sale", "New Arrivals", "Brands"].map(
+                  {['Shop', 'On Sale', 'New Arrivals', 'Brands'].map(
                     (text, index) => (
-                      <ListItem className="listItem" key={text} disablePadding>
+                      <ListItem className='listItem' key={text} disablePadding>
                         <ListItemButton>
                           <ListItemText primary={text} />
                         </ListItemButton>
@@ -228,15 +259,15 @@ const Navbar = () => {
           </div>
           <h2>SHOP.CO</h2>
         </div>
-        <div className="navbar-icons">
+        <div className='navbar-icons'>
           {showInput ? (
-            <div className="search-input">
-              <span className="search-icon">
+            <div className='search-input'>
+              <span className='search-icon'>
                 <SearchOutlinedIcon />
               </span>
               <input
-                type="text"
-                placeholder="Search for products..."
+                type='text'
+                placeholder='Search for products...'
                 onBlur={handleSearchInput}
                 onKeyDown={handleSearchInput}
               />
@@ -248,7 +279,6 @@ const Navbar = () => {
           {/* <AccountCircleOutlinedIcon
             onClick={getUserProfile}
           /> */}
-          
         </div>
       </div>
       {/* -------------- hamburger menu section ends ------------ */}

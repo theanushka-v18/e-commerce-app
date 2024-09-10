@@ -6,12 +6,29 @@ import { BrowserRouter, Route, Routes, useNavigate, useParams } from "react-rout
 import ViewAllProducts from "./ViewAllProducts";
 import { useAuth } from "../context/AuthContext";
 
-interface Product {
-  imgSrc: string;
+// interface Product {
+//   imgSrc: string;
+//   name: string;
+//   price: number;
+//   rating: number;
+//   productCategory: string;
+// }
+
+interface Review {
   name: string;
-  price: number;
+  comment: string;
   rating: number;
+}
+interface Product {
+  _id: string;
+  productName: string;
+  productDesc: string;
+  productPrice: string;
+  productImage: string;
+  productRating: number;
   productCategory: string;
+  reviews?: Review[]; // Add reviews field
+  [key: string]: any; // Allow additional fields
 }
 
 interface NewArrivalsProps {
@@ -19,12 +36,12 @@ interface NewArrivalsProps {
 }
 
 const NewArrivals: React.FC<NewArrivalsProps> = ({ heading }) => {
-  const [productsData, setProductsData] = useState<Product[] | null>(null);
+  // const [productsData, setProductsData] = useState<Product[] | null>(null);
   const [newArrivalProducts, setNewArrivalProducts] = useState<Product[] | null>(null);
   const [topSellingProducts, setTopSellingProducts] = useState<Product[] | null>(null);
   const [isViewAll, SetIsViewAll] = useState<boolean>(false);
 
-  // const {productsData, setProductsData} = useAuth();
+  const {productsData, setProductsData} = useAuth();
 
 
   const navigate = useNavigate();

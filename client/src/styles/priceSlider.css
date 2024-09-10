@@ -1,0 +1,36 @@
+.price-slider {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.horizontal-slider {
+  height: 5px;
+  background: #ccc;
+  border-radius: 5px;
+  position: relative;
+}
+
+.thumb {
+  height: 16px;
+  width: 16px;
+  background-color: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  top: -6px;
+}
+
+.track {
+  background: #000;
+  height: 5px;
+  border-radius: 5px;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+  font-family: 'Zain', sans-serif;
+  font-weight: 600;
+}
